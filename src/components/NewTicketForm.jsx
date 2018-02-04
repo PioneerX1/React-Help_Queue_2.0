@@ -1,9 +1,11 @@
 import React from 'react';
+import helpDeskPic from '../assets/images/helpdeskpic.jpg';
 
 function NewTicketForm(){
 
   return(
     <div>
+      <img src={helpDeskPic}/>
       <form>
         <input
           type='text'
