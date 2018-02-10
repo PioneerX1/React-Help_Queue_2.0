@@ -4,6 +4,7 @@ import Header from './Header';
 import TicketList from './TicketList';
 import NewTicketControl from './NewTicketControl';
 import Error404 from './Error404';
+import Moment from 'moment';
 
 class App extends React.Component {
 
@@ -17,9 +18,32 @@ class App extends React.Component {
 
   handleAddingNewTicketToList(newTicket){
     var newMasterTicketList = this.state.masterTicketList.slice();
+    newTicket.formattedWaitTime = (newTicket.timeOpen).fromNow(true);
     newMasterTicketList.push(newTicket);
     this.setState({masterTicketList: newMasterTicketList});
   }
+
+  componentWillMount() {
+    console.log('componentWillMount');
+  }
+
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps');
+  }
+
+  shouldComponentUpdate() {
+    console.log('shouldComponentUpdate');
+    return true;
+  }
+
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
 
   render(){
     return (
@@ -32,6 +56,20 @@ class App extends React.Component {
         </Switch>
       </div>
     );
+  }
+  componentDidMount() {
+    this.waitTimeUpdateTimer = setInterval(() => this.updateTicketElapsedWaitTime(), 60000);
+  }
+
+  updateTicketElapsedWaitTime() {
+    console.log('check');
+    let newMasterTicketList = this.state.masterTicketList.slice();
+    newMasterTicketList.forEach((ticket) => ticket.formattedWaitTime = (ticket.timeOpen).fromNow(true));
+    this.setState({masterTicketList: newMasterTicketList})
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.waitTimeUpdateTimer);
   }
 }
 
