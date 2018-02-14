@@ -9,14 +9,27 @@ function Ticket(props){
     paddingLeft: 20
   };
 
-  return(
+  const ticketInformation =
     <div style={ticketStyles}>
       <h3>{props.location} - {props.names}</h3>
       <h4><em>{props.formattedWaitTime}</em></h4>
       <p>{props.issue}</p>
       <hr/>
-    </div>
-  );
+    </div>;
+
+    if (props.currentRouterPath === './admin'){
+      return(
+        <div onClick={() => {alert('You just clicked ticket belonging to ' + props.names);}}>
+          {ticketInformation}
+        </div>
+      );
+    } else {
+      return(
+        <div>
+          {ticketInformation}
+        </div>
+      );
+    }
 }
 
 
@@ -25,6 +38,7 @@ Ticket.propTypes = {
   location: PropTypes.string.isRequired,
   issue: PropTypes.string,
   formattedWaitTime: PropTypes.string.isRequired,
+  currentRouterPath: PropTypes.string
 };
 
 export default Ticket;

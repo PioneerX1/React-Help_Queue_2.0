@@ -1,25 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Ticket from './Ticket';
+import PropTypes from 'prop-types';
 
 function TicketList(props){
-  var ticketListStyles = {
-    backgroundColor: 'skyblue',
-    fontFamily: 'sans-serif',
-    paddingTop: '100',
-    fontStyle: 'italic'
-  };
-
-  console.log(props.ticketList);
-  return(
-    <div style={ticketListStyles}>
+  return (
+    <div>
       <hr/>
       {props.ticketList.map((ticket) =>
-        <Ticket
-          names={ticket.names}
+        <Ticket names={ticket.names}
           location={ticket.location}
           issue={ticket.issue}
           formattedWaitTime={ticket.formattedWaitTime}
+          currentRouterPath={props.currentRouterPath}
           key={ticket.id}/>
       )}
     </div>
@@ -27,7 +19,8 @@ function TicketList(props){
 }
 
 TicketList.propTypes = {
-  ticketList: PropTypes.array
+  ticketList: PropTypes.array,
+  currentRouterPath: PropTypes.string
 };
 
 export default TicketList;
