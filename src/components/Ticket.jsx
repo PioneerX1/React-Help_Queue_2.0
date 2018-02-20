@@ -3,23 +3,22 @@ import PropTypes from 'prop-types';
 
 
 function Ticket(props){
-  var ticketStyles = {
-    backgroundColor: 'salmon',
-    fontStyle: 'bold',
-    paddingLeft: 20
-  };
 
   const ticketInformation =
-    <div style={ticketStyles}>
-      <h3>{props.location} - {props.names}</h3>
+    <div>
+      <h3>{props.names} - {props.location}</h3>
       <h4><em>{props.formattedWaitTime}</em></h4>
-      <p>{props.issue}</p>
       <hr/>
     </div>;
 
-    if (props.currentRouterPath === './admin'){
+    if (props.currentRouterPath === '/admin'){
       return(
-        <div onClick={() => {alert('You just clicked ticket belonging to ' + props.names);}}>
+        <div onClick={() => {props.onTicketSelection({
+            names: props.names,
+            location: props.location,
+            issue: props.issue,
+            formattedWaitTime: props.formattedWaitTime});
+          }}>
           {ticketInformation}
         </div>
       );
@@ -38,7 +37,8 @@ Ticket.propTypes = {
   location: PropTypes.string.isRequired,
   issue: PropTypes.string,
   formattedWaitTime: PropTypes.string.isRequired,
-  currentRouterPath: PropTypes.string
+  currentRouterPath: PropTypes.string,
+  onTicketSelection: PropTypes.func
 };
 
 export default Ticket;

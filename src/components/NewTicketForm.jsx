@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {v4} from 'uuid';
 import Moment from 'moment';
 
-import helpDeskPic from '../assets/images/helpdeskpic.jpg';
 
 function NewTicketForm(props){
   let _names = null;
@@ -20,7 +19,9 @@ function NewTicketForm(props){
 
   return(
     <div>
-      <img src={helpDeskPic}/>
+      <hr/>
+      <h2>Enter your ticket info here: </h2>
+      <br/>
       <form onSubmit={handleNewTicketFormSubmission}>
         <input
           type='text'
@@ -40,6 +41,7 @@ function NewTicketForm(props){
           placeholder='Describe your issue.'
           ref={(textarea) => {_issue = textarea;}}
           />
+        <br/><br/>
         <button type='submit'>Help!</button>
       </form>
     </div>
